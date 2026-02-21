@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.7
   flutter_svg: ^2.2.3
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -93,4 +94,6 @@ flutter:
     - assets/images/
     - assets/images/android12splash.png
     - assets/images/appBarLogo.svg
+    - assets/json_files/empty_list.json
+    - assets/json_files/image_picker.json
 
