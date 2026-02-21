@@ -5,12 +5,12 @@ import 'app_colors.dart';
 abstract class AppStyles {
   static const TextStyle largeTitle = TextStyle(
     fontSize: 20,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w500,
     color: AppColors.gold
   );
   static const TextStyle mediumTitle = TextStyle(
       fontSize: 16,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w500,
       color: AppColors.gold
   );
   static const TextStyle smallBody = TextStyle(
