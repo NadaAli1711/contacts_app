@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_styles.dart';
+import '../widgets/contacts_elevated_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           Lottie.asset(AppJsons.animation),
           Text('There is No Contacts Added Here',style: AppStyles.largeTitle,),
+
         ],
 
       ),
