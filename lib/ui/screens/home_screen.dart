@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_styles.dart';
 import '../widgets/contacts_elevated_button.dart';
+import '../widgets/contacts_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,16 +20,43 @@ class HomeScreen extends StatelessWidget {
         centerTitle: false,
         backgroundColor: Colors.transparent,
       ),
-      body: Column(
-        children: [
-          Lottie.asset(AppJsons.animation),
-          Text('There is No Contacts Added Here',style: AppStyles.largeTitle,),
-
-        ],
-
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Lottie.asset(AppJsons.animation),
+            Text(
+              'There is No Contacts Added Here',
+              style: AppStyles.largeTitle,
+            ),
+          ],
+        ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){},backgroundColor: AppColors.gold,child: Icon(Icons.add),),
-      );
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Container(
+                color: AppColors.darkBlue,
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 16,
+                  children: [
+                    ContactsText(text: 'User Name',),
+                    ContactsText(text: 'example@email.com',),
+                    Text('+200000000000',style: AppStyles.mediumTitle,),
+                    ContactsElevatedButton(),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+        backgroundColor: AppColors.gold,
+        child: Icon(Icons.add),
+      ),
+    );
   }
-
 }
