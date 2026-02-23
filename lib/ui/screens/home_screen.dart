@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController textController = TextEditingController();
-  final TextEditingController phontController = TextEditingController();
+  final TextEditingController phonetController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -44,40 +44,87 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
           showModalBottomSheet(
             context: context,
+            backgroundColor: AppColors.transparent,
             builder: (context) {
               return StatefulBuilder(
                 builder: (BuildContext context, StateSetter setModalState) {
-                  return Container(
-                    color: AppColors.darkBlue,
+                  return SingleChildScrollView(child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.darkBlue,
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      spacing: 16,
+                       spacing: 16,
                       children: [
-                        ContactsText(text: textController.text,),
-                        ContactsText(text: emailController.text,),
-                        Text('${phontController.text}',
-                          style: AppStyles.mediumTitle,),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: BoxBorder.all(color: AppColors.gold),
+                                  borderRadius: BorderRadius.circular(28),
+                                ),
+                                child: Lottie.asset(AppJsons.imagePicker),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                child: Column(
+                                  children: [
+                                    ContactsText(
+                                      textController: textController,
+                                      hintText: 'User Name',
+                                    ),
+                                    ContactsText(
+                                      textController: emailController,
+                                      hintText: 'example@email.com',
+                                    ),
+                                    ContactsText(
+                                      textController: phonetController,
+                                      hintText: '+200000000000',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         Form(
                           key: _formKey,
                           child: Column(
                             spacing: 8,
                             children: [
-                              ContactsTextForm(hintText: 'Enter User Name ',controller: textController,),
-                              ContactsTextForm(hintText: 'Enter User Email ',controller: emailController,),
-                              ContactsTextForm(hintText: 'Enter User Phone',controller: phontController,),
-
+                              ContactsTextForm(
+                                hintText: 'Enter User Name ',
+                                controller: textController,
+                                onChange: (s) => setModalState(() {}),
+                              ),
+                              ContactsTextForm(
+                                hintText: 'Enter User Email ',
+                                controller: emailController,
+                                onChange: (s) => setModalState(() {}),
+                              ),
+                              ContactsTextForm(
+                                hintText: 'Enter User Phone',
+                                controller: phonetController,
+                                onChange: (s) => setModalState(() {}),
+                              ),
                             ],
                           ),
                         ),
                         ContactsElevatedButton(),
                       ],
                     ),
-                  );
-                }
+                  ));
+                },
               );
             },
           );
