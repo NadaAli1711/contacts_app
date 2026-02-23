@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:contact_app/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../core/utils/app_assets.dart';
@@ -17,9 +20,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  XFile? contactImage;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController textController = TextEditingController();
-  final TextEditingController phonetController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -64,12 +68,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: BoxBorder.all(color: AppColors.gold),
-                                  borderRadius: BorderRadius.circular(28),
+                              child: AspectRatio(
+                                aspectRatio: 1,
+                                child: Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: AppColors.gold),
+                                    borderRadius: BorderRadius.circular(28),
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () =>
+                                        pickContactImage(setModalState),
+                                    child: contactImage != null
+                                        ? Image.file(
+                                            File(contactImage!.path),
+                                            fit: BoxFit.fill,
+                                          )
+                                        : Lottie.asset(AppJsons.imagePicker),
+                                  ),
                                 ),
-                                child: Lottie.asset(AppJsons.imagePicker),
                               ),
                             ),
                             Expanded(
@@ -89,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       hintText: 'example@email.com',
                                     ),
                                     ContactsText(
-                                      textController: phonetController,
+                                      textController: phoneController,
                                       hintText: '+200000000000',
                                     ),
                                   ],
@@ -115,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               ContactsTextForm(
                                 hintText: 'Enter User Phone',
-                                controller: phonetController,
+                                controller: phoneController,
                                 onChange: (s) => setModalState(() {}),
                               ),
                             ],
@@ -134,5 +151,16 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  Future<void> pickContactImage(StateSetter setModalState) async {
+    final ImagePicker picker = ImagePicker();
+    // Pick an image.
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setModalState(() {
+        contactImage = image;
+      });
+    }
   }
 }
