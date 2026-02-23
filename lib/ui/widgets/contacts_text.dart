@@ -22,5 +22,4 @@ class ContactsText extends StatelessWidget{
       child: Text(text, style: AppStyles.mediumTitle),
     );
   }
-  
 }

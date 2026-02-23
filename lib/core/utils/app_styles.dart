@@ -18,6 +18,11 @@ abstract class AppStyles {
       fontWeight: FontWeight.w500,
       color: AppColors.gold
   );
+  static const TextStyle hintStyle = TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: AppColors.gold
+  );
   static const TextStyle smallBody = TextStyle(
       fontSize: 10,
       fontWeight: FontWeight.w500,
