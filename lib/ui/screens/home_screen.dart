@@ -47,10 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
           showModalBottomSheet(
             context: context,
             backgroundColor: AppColors.transparent,
+            isScrollControlled: true,
             builder: (context) {
               return StatefulBuilder(
                 builder: (BuildContext context, StateSetter setModalState) {
-                  return SingleChildScrollView(child: Container(
+                  return Container(
                     decoration: BoxDecoration(
                       color: AppColors.darkBlue,
                       borderRadius: BorderRadius.all(Radius.circular(40)),
@@ -58,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                       spacing: 16,
+                      spacing: 16,
                       children: [
                         Row(
                           children: [
@@ -123,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ContactsElevatedButton(),
                       ],
                     ),
-                  ));
+                  );
                 },
               );
             },
