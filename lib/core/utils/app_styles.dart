@@ -26,6 +26,11 @@ abstract class AppStyles {
   static const TextStyle smallBody = TextStyle(
       fontSize: 10,
       fontWeight: FontWeight.w500,
-      color: AppColors.gold
+      color: AppColors.darkBlue
+  );
+  static const TextStyle smallButtonText = TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
+      color: AppColors.white
   );
 }
