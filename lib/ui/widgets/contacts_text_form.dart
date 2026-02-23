@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_styles.dart';
-
+typedef OnChange = void Function(String);
 class ContactsTextForm extends StatefulWidget{
   String hintText;
+  OnChange onChange;
   TextEditingController controller;
-  ContactsTextForm({super.key, required this.hintText, required this.controller});
+  ContactsTextForm({super.key, required this.hintText, required this.controller,required this.onChange  });
 
   @override
   State<ContactsTextForm> createState() => _ContactsTextFormState();
@@ -17,7 +18,7 @@ class _ContactsTextFormState extends State<ContactsTextForm> {
   Widget build(BuildContext context) {
     return TextFormField(
        controller: widget.controller,
-      onChanged: (s) => setState(() {}),
+      onChanged: widget.onChange,
       style: AppStyles.mediumTitle,
       cursorColor: AppColors.gold,
       autocorrect: true,
