@@ -7,10 +7,20 @@ import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_styles.dart';
 import '../widgets/contacts_elevated_button.dart';
 import '../widgets/contacts_text.dart';
+import '../widgets/contacts_text_form.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController textController = TextEditingController();
+  final TextEditingController phontController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,22 +44,40 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+
           showModalBottomSheet(
             context: context,
             builder: (context) {
-              return Container(
-                color: AppColors.darkBlue,
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 16,
-                  children: [
-                    ContactsText(text: 'User Name',),
-                    ContactsText(text: 'example@email.com',),
-                    Text('+200000000000',style: AppStyles.mediumTitle,),
-                    ContactsElevatedButton(),
-                  ],
-                ),
+              return StatefulBuilder(
+                builder: (BuildContext context, StateSetter setModalState) {
+                  return Container(
+                    color: AppColors.darkBlue,
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: 16,
+                      children: [
+                        ContactsText(text: textController.text,),
+                        ContactsText(text: emailController.text,),
+                        Text('${phontController.text}',
+                          style: AppStyles.mediumTitle,),
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            spacing: 8,
+                            children: [
+                              ContactsTextForm(hintText: 'Enter User Name ',controller: textController,),
+                              ContactsTextForm(hintText: 'Enter User Email ',controller: emailController,),
+                              ContactsTextForm(hintText: 'Enter User Phone',controller: phontController,),
+
+                            ],
+                          ),
+                        ),
+                        ContactsElevatedButton(),
+                      ],
+                    ),
+                  );
+                }
               );
             },
           );
