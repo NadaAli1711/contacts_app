@@ -8,7 +8,6 @@ class ContactsTextForm extends StatefulWidget{
   OnChange onChange;
   TextEditingController controller;
   ContactsTextForm({super.key, required this.hintText, required this.controller,required this.onChange  });
-
   @override
   State<ContactsTextForm> createState() => _ContactsTextFormState();
 }

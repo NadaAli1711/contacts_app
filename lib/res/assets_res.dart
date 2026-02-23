@@ -8,8 +8,10 @@ class AssetsRes {
 
   static const String PROJECT_NAME = 'contact_app';
   static const String PROJECT_VERSION = '1.0.0+1';
+  static const String PHONE_CALL = 'assets/images/Phone_call.png';
   static const String ANDROID12SPLASH = 'assets/images/android12splash.png';
   static const String APPBARLOGO = 'assets/images/appBarLogo.svg';
+  static const String EMAIL = 'assets/images/email.png';
   static const String EMPTY_LIST = 'assets/json_files/empty_list.json';
   static const String IMAGE_PICKER = 'assets/json_files/image_picker.json';
 }

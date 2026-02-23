@@ -93,8 +93,10 @@ flutter:
   # see https://flutter.dev/to/font-from-package
   assets:
     - assets/images/
+    - assets/images/Phone_call.png
     - assets/images/android12splash.png
     - assets/images/appBarLogo.svg
+    - assets/images/email.png
     - assets/json_files/empty_list.json
     - assets/json_files/image_picker.json
 
