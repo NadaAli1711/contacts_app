@@ -37,7 +37,6 @@ dependencies:
   flutter_native_splash: ^2.4.7
   flutter_svg: ^2.2.3
   lottie: ^3.3.2
-  image_picker: ^1.2.1
 
 dev_dependencies:
   flutter_test:

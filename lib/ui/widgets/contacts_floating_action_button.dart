@@ -180,9 +180,10 @@ class _ContactsFloatingActionButtonState
       );
       widget.onContactAdded();
       Navigator.pop(context);
+      textController.clear();
+      emailController.clear();
+      phoneController.clear();
+      contactImage = null;
     }
-    textController.clear();
-    emailController.clear();
-    phoneController.clear();
   }
 }
