@@ -16,7 +16,15 @@ class _ContactsTextFormState extends State<ContactsTextForm> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-       controller: widget.controller,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "This field is required";
+        } else {
+          return null;
+        }
+      },
+      controller: widget.controller,
       onChanged: widget.onChange,
       style: AppStyles.mediumTitle,
       cursorColor: AppColors.gold,
@@ -36,6 +44,10 @@ class _ContactsTextFormState extends State<ContactsTextForm> {
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide(color: AppColors.gold,width: 2)
+        ),
+        errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: AppColors.red, width: 2)
         ),
       ),
 

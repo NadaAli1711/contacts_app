@@ -66,18 +66,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: double.infinity,
                           ),
 
-                          // Container(
-                          //
-                          //   alignment: Alignment.bottomLeft,
-                          //   height: 33,
-                          //   width: 84,
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(8),
-                          //     color: AppColors.gold,
-                          //   ),
-                          //   padding: EdgeInsets.all(8),
-                          //   child: Text(contactList[index].name),
-                          // )
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(bottom: 8, left: 7),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColors.gold,
+                                ),
+                                padding: EdgeInsets.all(8),
+                                child: Text(contactList[index].name),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),

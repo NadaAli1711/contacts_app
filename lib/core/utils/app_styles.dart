@@ -33,4 +33,9 @@ abstract class AppStyles {
       fontWeight: FontWeight.w500,
       color: AppColors.white
   );
+  static const TextStyle errorText = TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
+      color: AppColors.red
+  );
 }
