@@ -38,9 +38,10 @@ class _ContactsFloatingActionButtonState
   final TextEditingController phoneController = TextEditingController();
 
   final TextEditingController emailController = TextEditingController();
-
+  bool imageRequired = false;
   @override
   Widget build(BuildContext context) {
+    imageRequired = false;
     return FloatingActionButton(
       onPressed: () {
         showModalBottomSheet(
@@ -63,24 +64,33 @@ class _ContactsFloatingActionButtonState
                       Row(
                         children: [
                           Expanded(
-                            child: AspectRatio(
-                              aspectRatio: 1,
-                              child: Container(
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColors.gold),
-                                  borderRadius: BorderRadius.circular(28),
-                                ),
-                                child: GestureDetector(
-                                  onTap: () => pickContactImage(setModalState),
-                                  child: contactImage != null
-                                      ? Image.file(
-                                    File(contactImage!.path),
-                                    fit: BoxFit.fill,
-                                  )
-                                      : Lottie.asset(AppJsons.imagePicker),
-                                ),
-                              ),
+                            child: Column(
+
+                              children: [
+                                AspectRatio(aspectRatio: 1, child: Container(
+
+
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: imageRequired
+                                        ? AppColors.red
+                                        : AppColors.gold),
+                                    borderRadius: BorderRadius.circular(28),
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () =>
+                                        pickContactImage(setModalState),
+                                    child: contactImage != null
+                                        ? Image.file(
+                                      File(contactImage!.path),
+                                      fit: BoxFit.fill,
+                                    )
+                                        : Lottie.asset(AppJsons.imagePicker),
+                                  ),
+                                )),
+                                imageRequired ? Text('This field is required',
+                                  style: AppStyles.errorText,) : SizedBox()
+                              ],
                             ),
                           ),
                           Expanded(
@@ -133,7 +143,7 @@ class _ContactsFloatingActionButtonState
                         ),
                       ),
                       ContactsElevatedButton(
-                        onPressed: onPressed,
+                        onPressed: () => onPressed(setModalState),
                         color: AppColors.gold,
                         text: 'Enter user',
                         textStyle: AppStyles.buttonText,
@@ -165,11 +175,8 @@ class _ContactsFloatingActionButtonState
     }
   }
 
-  void onPressed() {
-    if (textController.text.isNotEmpty &&
-        emailController.text.isNotEmpty &&
-        phoneController.text.isNotEmpty &&
-        contactImage != null) {
+  void onPressed(StateSetter setModalState) {
+    if (_formKey.currentState!.validate() && contactImage != null) {
       widget.contactList.add(
         ContactModel(
           name: textController.text,
@@ -184,6 +191,12 @@ class _ContactsFloatingActionButtonState
       emailController.clear();
       phoneController.clear();
       contactImage = null;
+    } else if (contactImage != null) {
+      imageRequired = false;
+    } else {
+      imageRequired = true;
     }
+    setModalState(() {});
+
   }
 }
