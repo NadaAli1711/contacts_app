@@ -1,11 +1,13 @@
 import 'package:contact_app/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+
 import '../../core/utils/app_styles.dart';
 
 class ContactsText extends StatelessWidget {
-  TextEditingController textController;
-  String hintText;
-  ContactsText({
+  final TextEditingController textController;
+  final String hintText;
+
+  const ContactsText({
     super.key,
     required this.textController,
     required this.hintText,
