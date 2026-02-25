@@ -13,10 +13,10 @@ import 'contacts_text.dart';
 import 'contacts_text_form.dart';
 
 class ContactsFloatingActionButton extends StatefulWidget {
-  List<ContactModel> contactList;
-  VoidCallback onContactAdded;
+  final List<ContactModel> contactList;
+  final VoidCallback onContactAdded;
 
-  ContactsFloatingActionButton({
+  const ContactsFloatingActionButton({
     super.key,
     required this.contactList,
     required this.onContactAdded,
@@ -41,7 +41,6 @@ class _ContactsFloatingActionButtonState
   bool imageRequired = false;
   @override
   Widget build(BuildContext context) {
-    imageRequired = false;
     return FloatingActionButton(
       onPressed: () {
         showModalBottomSheet(
@@ -56,7 +55,12 @@ class _ContactsFloatingActionButtonState
                     color: AppColors.darkBlue,
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                   ),
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom + 15,
+                    left: 16,
+                    right: 16,
+                    top: 10,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     spacing: 16,
@@ -65,31 +69,37 @@ class _ContactsFloatingActionButtonState
                         children: [
                           Expanded(
                             child: Column(
-
                               children: [
-                                AspectRatio(aspectRatio: 1, child: Container(
-
-
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: imageRequired
-                                        ? AppColors.red
-                                        : AppColors.gold),
-                                    borderRadius: BorderRadius.circular(28),
+                                AspectRatio(
+                                  aspectRatio: 1,
+                                  child: Container(
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: imageRequired
+                                            ? AppColors.red
+                                            : AppColors.gold,
+                                      ),
+                                      borderRadius: BorderRadius.circular(28),
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () =>
+                                          pickContactImage(setModalState),
+                                      child: contactImage != null
+                                          ? Image.file(
+                                              File(contactImage!.path),
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Lottie.asset(AppJsons.imagePicker),
+                                    ),
                                   ),
-                                  child: GestureDetector(
-                                    onTap: () =>
-                                        pickContactImage(setModalState),
-                                    child: contactImage != null
-                                        ? Image.file(
-                                      File(contactImage!.path),
-                                      fit: BoxFit.fill,
-                                    )
-                                        : Lottie.asset(AppJsons.imagePicker),
-                                  ),
-                                )),
-                                imageRequired ? Text('This field is required',
-                                  style: AppStyles.errorText,) : SizedBox()
+                                ),
+                                imageRequired
+                                    ? Text(
+                                        'This field is required',
+                                        style: AppStyles.errorText,
+                                      )
+                                    : SizedBox(),
                               ],
                             ),
                           ),
@@ -122,22 +132,25 @@ class _ContactsFloatingActionButtonState
                       Form(
                         key: _formKey,
                         child: Column(
-                          spacing: 8,
+                          spacing: 5,
                           children: [
                             ContactsTextForm(
                               hintText: 'Enter User Name ',
                               controller: textController,
                               onChange: (s) => setModalState(() {}),
+                              keyboardType: TextInputType.text,
                             ),
                             ContactsTextForm(
                               hintText: 'Enter User Email ',
                               controller: emailController,
                               onChange: (s) => setModalState(() {}),
+                              keyboardType: TextInputType.emailAddress,
                             ),
                             ContactsTextForm(
                               hintText: 'Enter User Phone',
                               controller: phoneController,
                               onChange: (s) => setModalState(() {}),
+                              keyboardType: TextInputType.phone,
                             ),
                           ],
                         ),
@@ -157,7 +170,9 @@ class _ContactsFloatingActionButtonState
               },
             );
           },
-        );
+        ).then((onValue) {
+          clearData();
+        });
       },
       backgroundColor: AppColors.gold,
       child: Icon(Icons.add),
@@ -171,6 +186,7 @@ class _ContactsFloatingActionButtonState
     if (image != null) {
       setModalState(() {
         contactImage = image;
+        imageRequired = false;
       });
     }
   }
@@ -186,17 +202,21 @@ class _ContactsFloatingActionButtonState
         ),
       );
       widget.onContactAdded();
-      Navigator.pop(context);
-      textController.clear();
-      emailController.clear();
-      phoneController.clear();
-      contactImage = null;
     } else if (contactImage != null) {
       imageRequired = false;
     } else {
       imageRequired = true;
     }
     setModalState(() {});
+  }
 
+  void clearData() {
+    setState(() {
+      textController.clear();
+      emailController.clear();
+      phoneController.clear();
+      contactImage = null;
+      imageRequired = false;
+    });
   }
 }

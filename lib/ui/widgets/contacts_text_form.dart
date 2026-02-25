@@ -4,10 +4,13 @@ import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_styles.dart';
 typedef OnChange = void Function(String);
 class ContactsTextForm extends StatefulWidget{
-  String hintText;
-  OnChange onChange;
-  TextEditingController controller;
-  ContactsTextForm({super.key, required this.hintText, required this.controller,required this.onChange  });
+  final String hintText;
+  final OnChange onChange;
+  final TextEditingController controller;
+  final TextInputType keyboardType;
+
+  const ContactsTextForm(
+      {super.key, required this.hintText, required this.controller, required this.onChange, required this.keyboardType});
   @override
   State<ContactsTextForm> createState() => _ContactsTextFormState();
 }
@@ -29,7 +32,7 @@ class _ContactsTextFormState extends State<ContactsTextForm> {
       style: AppStyles.mediumTitle,
       cursorColor: AppColors.gold,
       autocorrect: true,
-      keyboardType: TextInputType.text,
+      keyboardType: widget.keyboardType,
       decoration: InputDecoration(
         hintStyle: AppStyles.hintStyle,
         hintText: widget.hintText,
