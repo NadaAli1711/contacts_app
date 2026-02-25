@@ -135,18 +135,21 @@ class _ContactsFloatingActionButtonState
                           spacing: 5,
                           children: [
                             ContactsTextForm(
+                              label: "name",
                               hintText: 'Enter User Name ',
                               controller: textController,
                               onChange: (s) => setModalState(() {}),
                               keyboardType: TextInputType.text,
                             ),
                             ContactsTextForm(
+                              label: "email",
                               hintText: 'Enter User Email ',
                               controller: emailController,
                               onChange: (s) => setModalState(() {}),
                               keyboardType: TextInputType.emailAddress,
                             ),
                             ContactsTextForm(
+                              label: "phone",
                               hintText: 'Enter User Phone',
                               controller: phoneController,
                               onChange: (s) => setModalState(() {}),
@@ -202,6 +205,8 @@ class _ContactsFloatingActionButtonState
         ),
       );
       widget.onContactAdded();
+
+      Navigator.pop(context);
     } else if (contactImage != null) {
       imageRequired = false;
     } else {
