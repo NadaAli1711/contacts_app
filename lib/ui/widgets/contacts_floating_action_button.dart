@@ -171,6 +171,7 @@ class _ContactsFloatingActionButtonState
     if (image != null) {
       setModalState(() {
         contactImage = image;
+        imageRequired = false;
       });
     }
   }
