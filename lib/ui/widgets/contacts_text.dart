@@ -23,7 +23,7 @@ class ContactsText extends StatelessWidget {
       ),
       child: Text(
         textController.text.isEmpty ? hintText : textController.text,
-        style: AppStyles.mediumTitle,
+        style: AppStyles.gold16Medium,
       ),
     );
   }

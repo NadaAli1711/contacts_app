@@ -97,7 +97,7 @@ class _ContactsFloatingActionButtonState
                                 imageRequired
                                     ? Text(
                                         'This field is required',
-                                        style: AppStyles.errorText,
+                                        style: AppStyles.red10Medium,
                                       )
                                     : SizedBox(),
                               ],
@@ -162,7 +162,7 @@ class _ContactsFloatingActionButtonState
                         onPressed: () => onPressed(setModalState),
                         color: AppColors.gold,
                         text: 'Enter user',
-                        textStyle: AppStyles.buttonText,
+                        textStyle: AppStyles.darkBlue20Regular,
                         height: 60,
                         radius: 16,
                         hasIcon: false,

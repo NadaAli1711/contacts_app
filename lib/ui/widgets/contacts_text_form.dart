@@ -57,12 +57,12 @@ class _ContactsTextFormState extends State<ContactsTextForm> {
       },
       controller: widget.controller,
       onChanged: widget.onChange,
-      style: AppStyles.mediumTitle,
+      style: AppStyles.gold16Medium,
       cursorColor: AppColors.gold,
       autocorrect: true,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
-        hintStyle: AppStyles.hintStyle,
+        hintStyle: AppStyles.gold16Regular,
         hintText: widget.hintText,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),

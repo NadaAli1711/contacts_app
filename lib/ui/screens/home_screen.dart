@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Lottie.asset(AppJsons.animation),
             Text(
               'There is No Contacts Added Here',
-              style: AppStyles.largeTitle,
+              style: AppStyles.gold20Medium,
             ),
           ],
         )
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Image.asset('assets/images/email.png'),
                                 Text(
                                   contactList[index].email,
-                                  style: AppStyles.smallBody,
+                                  style: AppStyles.darkBlue10Medium,
                                 ),
                               ],
                             ),
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Image.asset('assets/images/Phone_call.png'),
                                 Text(
                                   contactList[index].phoneNumber,
-                                  style: AppStyles.smallBody,
+                                  style: AppStyles.darkBlue10Medium,
                                 ),
                               ],
                             ),

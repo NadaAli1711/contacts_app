@@ -15,7 +15,7 @@ class ContactsElevatedButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.height = 31,
-    this.textStyle = AppStyles.smallButtonText,
+    this.textStyle = AppStyles.white10Medium,
     this.text = 'Delete',
     this.color = AppColors.red,
     this.radius = 8,
