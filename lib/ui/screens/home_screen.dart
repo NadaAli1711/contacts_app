@@ -10,6 +10,7 @@ import '../../core/models/contact_model.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_styles.dart';
 import '../widgets/contacts_elevated_button.dart';
+import '../widgets/contacts_grid_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -44,96 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         )
-            : GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.65,
-            crossAxisSpacing: (16/designWidth)*width,
-            mainAxisSpacing: (16/designHeight)*height,
-          ),
-          itemBuilder: (context, index) =>
-              Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular((16/designWidth)*width),
-                  color: AppColors.gold,
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Stack(
-                        children: [
-                          Image.file(
-                            File(contactList[index].image!.path),
-                            fit: BoxFit.fill,
-                            width: double.infinity,
-                          ),
-
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(bottom: (8/designHeight)*height, left: (7/designWidth)*width),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular((8/designWidth)*width),
-                                  color: AppColors.gold,
-                                ),
-                                padding: EdgeInsets.all((8/designWidth)*width),
-                                child: Text(contactList[index].name),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: (15/designHeight)*height,
-                          left: (8/designWidth)*width,
-                          right: (8/designWidth)*width,
-                          bottom: (7/designHeight)*height,
-                        ),
-                        child: Column(
-                          spacing: (8/designHeight)*height,
-                          children: [
-                            Row(
-                              spacing: (8/designWidth)*width,
-                              children: [
-                                Image.asset(AppImages.email),
-                                Text(
-                                  contactList[index].email,
-                                  style: AppStyles.darkBlue10Medium,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              spacing: (8/designWidth)*width,
-                              children: [
-                                Image.asset(AppImages.phoneCall),
-                                Text(
-                                  contactList[index].phoneNumber,
-                                  style: AppStyles.darkBlue10Medium,
-                                ),
-                              ],
-                            ),
-                            ContactsElevatedButton(onPressed: () {
-                              contactList.removeAt(index);
-                              setState(() {
-
-                              });
-                            }),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-          itemCount: contactList.length,
-        ),
+            : ContactsGridView(contactList: contactList)
       ),
 
       floatingActionButton: Column(
