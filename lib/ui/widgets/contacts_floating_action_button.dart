@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:contact_app/core/utils/app_styles.dart';
-import 'package:contact_app/core/utils/app_validators.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
@@ -10,8 +9,8 @@ import '../../core/models/contact_model.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
 import 'contacts_elevated_button.dart';
+import 'contacts_form.dart';
 import 'contacts_text.dart';
-import 'contacts_text_form.dart';
 
 class ContactsFloatingActionButton extends StatefulWidget {
   final List<ContactModel> contactList;
@@ -134,38 +133,8 @@ class _ContactsFloatingActionButtonState
                           ),
                         ],
                       ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          spacing: (5/designHeight)*height,
-                          children: [
-                            ContactsTextForm(
-                              label: "name",
-                              hintText: 'Enter User Name ',
-                              controller: textController,
-                              onChange: (s) => setModalState(() {}),
-                              keyboardType: TextInputType.text,
-                              validator: AppValidators.nameValidator,
-                            ),
-                            ContactsTextForm(
-                              label: "email",
-                              hintText: 'Enter User Email ',
-                              controller: emailController,
-                              onChange: (s) => setModalState(() {}),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: AppValidators.emailValidator,
-                            ),
-                            ContactsTextForm(
-                              label: "phone",
-                              hintText: 'Enter User Phone',
-                              controller: phoneController,
-                              onChange: (s) => setModalState(() {}),
-                              keyboardType: TextInputType.phone,
-                              validator: AppValidators.phoneValidator,
-                            ),
-                          ],
-                        ),
-                      ),
+                      ContactsForm(onChange: (s) => setModalState(() {}),formKey: _formKey,emailController: emailController,phoneController: phoneController,textController: textController,),
+
                       ContactsElevatedButton(
                         onPressed: () => onPressed(setModalState),
                         color: AppColors.gold,

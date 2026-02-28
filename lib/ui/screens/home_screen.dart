@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:contact_app/core/utils/app_colors.dart';
 import 'package:contact_app/ui/widgets/contacts_floating_action_button.dart';
@@ -9,7 +8,6 @@ import 'package:lottie/lottie.dart';
 import '../../core/models/contact_model.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_styles.dart';
-import '../widgets/contacts_elevated_button.dart';
 import '../widgets/contacts_grid_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
     var height = MediaQuery.of(context).size.height;
     double designHeight = 874;
     return Scaffold(
-      backgroundColor: AppColors.darkBlue,
       appBar: AppBar(
         title: SvgPicture.asset(AppImages.appBarLogo),
         centerTitle: false,

@@ -15,6 +15,7 @@ class ContactsApp extends StatelessWidget {
      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
       theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.darkBlue,
         textSelectionTheme: TextSelectionThemeData(
           selectionHandleColor: AppColors.transparent,
           cursorColor: AppColors.gold,
