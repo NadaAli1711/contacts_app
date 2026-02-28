@@ -15,8 +15,10 @@ class ContactsText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    double designHeight = 874;
     return Container(
-      padding: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(bottom: (16/designHeight)*height),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: AppColors.gold)),

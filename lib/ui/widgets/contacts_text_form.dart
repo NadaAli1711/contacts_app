@@ -28,6 +28,7 @@ class ContactsTextForm extends StatefulWidget {
 class _ContactsTextFormState extends State<ContactsTextForm> {
   @override
   Widget build(BuildContext context) {
+
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUnfocus,
       inputFormatters: widget.label == 'phone'
@@ -64,23 +65,19 @@ class _ContactsTextFormState extends State<ContactsTextForm> {
       decoration: InputDecoration(
         hintStyle: AppStyles.gold16Regular,
         hintText: widget.hintText,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.gold),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.gold),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.gold, width: 2),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: AppColors.red, width: 2),
-        ),
+        border: buildBorder(),
+        enabledBorder: buildBorder(),
+        focusedBorder: buildBorder(borderWidth: 2),
+        errorBorder: buildBorder(color: AppColors.red, borderWidth: 2),
       ),
+    );
+  }
+  OutlineInputBorder buildBorder({double borderWidth= 1, Color color = AppColors.gold}){
+    var width = MediaQuery.of(context).size.width;
+    double designWidth = 402;
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular((16/designWidth)*width),
+      borderSide: BorderSide(color: color, width: (borderWidth/designWidth)*width),
     );
   }
 }

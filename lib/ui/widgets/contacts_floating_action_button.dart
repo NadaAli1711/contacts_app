@@ -41,6 +41,10 @@ class _ContactsFloatingActionButtonState
   bool imageRequired = false;
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    double designWidth = 402;
+    var height = MediaQuery.of(context).size.height;
+    double designHeight = 874;
     return FloatingActionButton(
       onPressed: () {
         showModalBottomSheet(
@@ -56,14 +60,14 @@ class _ContactsFloatingActionButtonState
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                   ),
                   padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom + 15,
-                    left: 16,
-                    right: 16,
-                    top: 10,
+                    bottom: MediaQuery.of(context).viewInsets.bottom + (15/designHeight)*height,
+                    left: (16/designWidth)*width,
+                    right: (16/designWidth)*width,
+                    top: (10/designHeight)*height,
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    spacing: 16,
+                    spacing: (16/designHeight)*height,
                     children: [
                       Row(
                         children: [
@@ -80,7 +84,7 @@ class _ContactsFloatingActionButtonState
                                             ? AppColors.red
                                             : AppColors.gold,
                                       ),
-                                      borderRadius: BorderRadius.circular(28),
+                                      borderRadius: BorderRadius.circular((28/designWidth)*width),
                                     ),
                                     child: GestureDetector(
                                       onTap: () =>
@@ -106,8 +110,8 @@ class _ContactsFloatingActionButtonState
                           Expanded(
                             flex: 2,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: (10/designWidth)*width,
                               ),
                               child: Column(
                                 children: [
@@ -132,7 +136,7 @@ class _ContactsFloatingActionButtonState
                       Form(
                         key: _formKey,
                         child: Column(
-                          spacing: 5,
+                          spacing: (5/designHeight)*height,
                           children: [
                             ContactsTextForm(
                               label: "name",
@@ -163,8 +167,8 @@ class _ContactsFloatingActionButtonState
                         color: AppColors.gold,
                         text: 'Enter user',
                         textStyle: AppStyles.darkBlue20Regular,
-                        height: 60,
-                        radius: 16,
+                        buttonHeight: (60/designHeight)*height,
+                        radius: (16/designWidth)*width,
                         hasIcon: false,
                       ),
                     ],

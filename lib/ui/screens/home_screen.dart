@@ -21,6 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ContactModel> contactList = [];
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    double designWidth = 402;
+    var height = MediaQuery.of(context).size.height;
+    double designHeight = 874;
     return Scaffold(
       backgroundColor: AppColors.darkBlue,
       appBar: AppBar(
@@ -29,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.transparent,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all((16/designWidth)*width),
         child: contactList.isEmpty
             ? Column(
           children: [
@@ -44,14 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.65,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
+            crossAxisSpacing: (16/designWidth)*width,
+            mainAxisSpacing: (16/designHeight)*height,
           ),
           itemBuilder: (context, index) =>
               Container(
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular((16/designWidth)*width),
                   color: AppColors.gold,
                 ),
                 child: Column(
@@ -70,12 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(bottom: 8, left: 7),
+                                margin: EdgeInsets.only(bottom: (8/designHeight)*height, left: (7/designWidth)*width),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular((8/designWidth)*width),
                                   color: AppColors.gold,
                                 ),
-                                padding: EdgeInsets.all(8),
+                                padding: EdgeInsets.all((8/designWidth)*width),
                                 child: Text(contactList[index].name),
                               ),
                             ],
@@ -86,17 +90,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 15.0,
-                          left: 8,
-                          right: 8,
-                          bottom: 7,
+                        padding: EdgeInsets.only(
+                          top: (15/designHeight)*height,
+                          left: (8/designWidth)*width,
+                          right: (8/designWidth)*width,
+                          bottom: (7/designHeight)*height,
                         ),
                         child: Column(
-                          spacing: 8,
+                          spacing: (8/designHeight)*height,
                           children: [
                             Row(
-                              spacing: 8,
+                              spacing: (8/designWidth)*width,
                               children: [
                                 Image.asset('assets/images/email.png'),
                                 Text(
@@ -106,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             Row(
-                              spacing: 8,
+                              spacing: (8/designWidth)*width,
                               children: [
                                 Image.asset('assets/images/Phone_call.png'),
                                 Text(
@@ -134,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        spacing: 8,
+        spacing: (8/designHeight)*height,
         children: [
           contactList.isNotEmpty ? FloatingActionButton(onPressed: () {
             contactList.removeLast();
