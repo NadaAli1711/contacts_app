@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               spacing: (8/designWidth)*width,
                               children: [
-                                Image.asset('assets/images/email.png'),
+                                Image.asset(AppImages.email),
                                 Text(
                                   contactList[index].email,
                                   style: AppStyles.darkBlue10Medium,
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               spacing: (8/designWidth)*width,
                               children: [
-                                Image.asset('assets/images/Phone_call.png'),
+                                Image.asset(AppImages.Phone_call),
                                 Text(
                                   contactList[index].phoneNumber,
                                   style: AppStyles.darkBlue10Medium,
