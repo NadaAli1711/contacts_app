@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:contact_app/core/utils/app_styles.dart';
+import 'package:contact_app/core/utils/app_validators.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
@@ -144,6 +145,7 @@ class _ContactsFloatingActionButtonState
                               controller: textController,
                               onChange: (s) => setModalState(() {}),
                               keyboardType: TextInputType.text,
+                              validator: AppValidators.nameValidator,
                             ),
                             ContactsTextForm(
                               label: "email",
@@ -151,6 +153,7 @@ class _ContactsFloatingActionButtonState
                               controller: emailController,
                               onChange: (s) => setModalState(() {}),
                               keyboardType: TextInputType.emailAddress,
+                              validator: AppValidators.emailValidator,
                             ),
                             ContactsTextForm(
                               label: "phone",
@@ -158,6 +161,7 @@ class _ContactsFloatingActionButtonState
                               controller: phoneController,
                               onChange: (s) => setModalState(() {}),
                               keyboardType: TextInputType.phone,
+                              validator: AppValidators.phoneValidator,
                             ),
                           ],
                         ),

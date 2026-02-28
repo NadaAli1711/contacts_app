@@ -5,6 +5,7 @@ import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_styles.dart';
 
 typedef OnChange = void Function(String);
+typedef Validator = String? Function(String?);
 
 class ContactsTextForm extends StatefulWidget {
   final String hintText;
@@ -12,6 +13,7 @@ class ContactsTextForm extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final String label;
+  final Validator validator;
 
   const ContactsTextForm({
     super.key,
@@ -20,6 +22,7 @@ class ContactsTextForm extends StatefulWidget {
     required this.onChange,
     required this.keyboardType,
     required this.label,
+    required this.validator,
   });
   @override
   State<ContactsTextForm> createState() => _ContactsTextFormState();
@@ -37,25 +40,7 @@ class _ContactsTextFormState extends State<ContactsTextForm> {
               LengthLimitingTextInputFormatter(11),
             ]
           : null,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "This field is required";
-        }
-        if (widget.label == 'email') {
-          if (!value.contains('@') || !value.endsWith('.com')) {
-            return "Enter a valid email for example name@example.com";
-          }
-        } else if (widget.label == 'phone') {
-          if (!value.startsWith('01')) {
-            return "Phone must start with 01";
-          }
-          if (value.length != 11) {
-            return "Phone must be exactly 11 digits";
-          }
-        }
-
-        return null;
-      },
+      validator: widget.validator,
       controller: widget.controller,
       onChanged: widget.onChange,
       style: AppStyles.gold16Medium,
