@@ -1,0 +1,32 @@
+import 'package:contact_app/core/utils/app_colors.dart';
+import 'package:flutter/material.dart';
+
+import '../../core/utils/app_styles.dart';
+
+class ContactsText extends StatelessWidget {
+  final TextEditingController textController;
+  final String hintText;
+
+  const ContactsText({
+    super.key,
+    required this.textController,
+    required this.hintText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    double designHeight = 874;
+    return Container(
+      padding: EdgeInsets.only(bottom: (16/designHeight)*height),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: AppColors.gold)),
+      ),
+      child: Text(
+        textController.text.isEmpty ? hintText : textController.text,
+        style: AppStyles.gold16Medium,
+      ),
+    );
+  }
+}
