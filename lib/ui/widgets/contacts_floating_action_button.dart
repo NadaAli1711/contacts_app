@@ -1,16 +1,12 @@
-import 'dart:io';
-
 import 'package:contact_app/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lottie/lottie.dart';
-
 import '../../core/models/contact_model.dart';
-import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
 import 'contacts_elevated_button.dart';
 import 'contacts_form.dart';
 import 'contacts_text.dart';
+import 'form_image_display.dart';
 
 class ContactsFloatingActionButton extends StatefulWidget {
   final List<ContactModel> contactList;
@@ -60,58 +56,32 @@ class _ContactsFloatingActionButtonState
                     borderRadius: BorderRadius.all(Radius.circular(40)),
                   ),
                   padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom + (15/designHeight)*height,
-                    left: (16/designWidth)*width,
-                    right: (16/designWidth)*width,
-                    top: (10/designHeight)*height,
+                    bottom:
+                        MediaQuery.of(context).viewInsets.bottom +
+                        (15 / designHeight) * height,
+                    left: (16 / designWidth) * width,
+                    right: (16 / designWidth) * width,
+                    top: (10 / designHeight) * height,
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    spacing: (16/designHeight)*height,
+                    spacing: (16 / designHeight) * height,
                     children: [
                       Row(
                         children: [
                           Expanded(
-                            child: Column(
-                              children: [
-                                AspectRatio(
-                                  aspectRatio: 1,
-                                  child: Container(
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: imageRequired
-                                            ? AppColors.red
-                                            : AppColors.gold,
-                                      ),
-                                      borderRadius: BorderRadius.circular((28/designWidth)*width),
-                                    ),
-                                    child: GestureDetector(
-                                      onTap: () =>
-                                          pickContactImage(setModalState),
-                                      child: contactImage != null
-                                          ? Image.file(
-                                              File(contactImage!.path),
-                                              fit: BoxFit.fill,
-                                            )
-                                          : Lottie.asset(AppJsons.imagePicker),
-                                    ),
-                                  ),
-                                ),
-                                imageRequired
-                                    ? Text(
-                                        'This field is required',
-                                        style: AppStyles.red10Medium,
-                                      )
-                                    : SizedBox(),
-                              ],
+                            child: FormImageDisplay(
+                              imageRequired: imageRequired,
+                              contactImage: contactImage,
+                              setModalState: setModalState,
+                                onTab : () => pickContactImage(setModalState),
                             ),
                           ),
                           Expanded(
                             flex: 2,
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal: (10/designWidth)*width,
+                                horizontal: (10 / designWidth) * width,
                               ),
                               child: Column(
                                 children: [
@@ -133,15 +103,21 @@ class _ContactsFloatingActionButtonState
                           ),
                         ],
                       ),
-                      ContactsForm(onChange: (s) => setModalState(() {}),formKey: _formKey,emailController: emailController,phoneController: phoneController,textController: textController,),
+                      ContactsForm(
+                        onChange: (s) => setModalState(() {}),
+                        formKey: _formKey,
+                        emailController: emailController,
+                        phoneController: phoneController,
+                        textController: textController,
+                      ),
 
                       ContactsElevatedButton(
                         onPressed: () => onPressed(setModalState),
                         color: AppColors.gold,
                         text: 'Enter user',
                         textStyle: AppStyles.darkBlue20Regular,
-                        buttonHeight: (60/designHeight)*height,
-                        radius: (16/designWidth)*width,
+                        buttonHeight: (60 / designHeight) * height,
+                        radius: (16 / designWidth) * width,
                         hasIcon: false,
                       ),
                     ],
@@ -157,18 +133,6 @@ class _ContactsFloatingActionButtonState
       backgroundColor: AppColors.gold,
       child: Icon(Icons.add),
     );
-  }
-
-  Future<void> pickContactImage(StateSetter setModalState) async {
-    final ImagePicker picker = ImagePicker();
-    // Pick an image.
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      setModalState(() {
-        contactImage = image;
-        imageRequired = false;
-      });
-    }
   }
 
   void onPressed(StateSetter setModalState) {
@@ -200,5 +164,16 @@ class _ContactsFloatingActionButtonState
       contactImage = null;
       imageRequired = false;
     });
+  }
+  Future<void> pickContactImage(StateSetter setModalState) async {
+    final ImagePicker picker = ImagePicker();
+    // Pick an image.
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setModalState(() {
+        contactImage = image;
+        imageRequired = false;
+      });
+    }
   }
 }
